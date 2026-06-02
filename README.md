@@ -24,16 +24,3 @@ Software.
 4. Criar o banco atendelab.
 5. Importar o script database/atendelab.sql.
 6. Acessar http://localhost/atendelab/public/
-# Sistema operacional
-.DS_Store
-Thumbs.db
-# Dependências
-/vendor/
-/node_modules/
-# Ambiente
-.env
-# Logs
-*.log
-# Arquivos temporários
-*.tmp
-*.bak
