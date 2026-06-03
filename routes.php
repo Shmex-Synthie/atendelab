@@ -1,7 +1,7 @@
 <?php
 
 
-require_once __DIR__ . '/app/Controllers/UsuarioController.php';
+require_once __DIR__ . '/app/Controllers/UsuariosController.php';
 
 
 $controller = $_GET['controller'] ?? 'home';
