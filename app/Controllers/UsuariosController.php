@@ -10,7 +10,6 @@ class UsuariosController
         $this->pdo = $pdo;
     }
 
-    // 1. LISTAR USUÁRIOS
     public function listar(): void
     {
         header('Content-Type: application/json; charset=utf-8');

@@ -28,7 +28,7 @@ class AuthController
         }
 
 
-        %erro = $_SESSION['erro_login'] ?? null;
+        $erro = $_SESSION['erro_login'] ?? null;
         $mensagem = $_SESSION['mensagem'] ?? null;
 
         unset($_SESSION['erro_login'], $_SESSION['mensagem']);
@@ -117,6 +117,26 @@ class AuthController
 
         if (ini_get('session.use_cookies')) {
             $params = session_get_cookie_params();
+
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params['path'],
+                $params['domain'],
+                $params['secure'],
+                $params['httponly']
+            );
         }
+
+        session_destroy();
+
+        session_start();
+
+        $_SESSION['mensagem'] = 'Sessão encerrada com sucesso.';
+
+        header('Location: ?controller=auth&action=login');
+        exit;
     }
+    
 }
