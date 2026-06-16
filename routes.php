@@ -22,7 +22,7 @@ switch ($controller) {
             case 'dashboard':
                 $authController->dashboard();
                 break;
-            case 'logut':
+            case 'logout':
                 $authController->logout();
                 break;
 

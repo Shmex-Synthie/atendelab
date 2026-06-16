@@ -23,8 +23,8 @@
                         <?php if (!empty($erro)): ?>
                             <div class="alert alert-danger">
                                 <?= htmlspecialchars(
-                                    $erro
-                                    ENT_QUOTES
+                                    $erro,
+                                    ENT_QUOTES,
                                    'UTF-8'   
                                 ) ?>
                             </div>

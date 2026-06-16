@@ -1,7 +1,7 @@
 <?php
 
 $host = '127.0.0.1';
-$porta = '3306'; // use 3307 quando necessario
+$porta = '3307'; // use 3307 quando necessario
 $banco = 'atendelab';
 $usuario = 'root';
 $senha = '';
