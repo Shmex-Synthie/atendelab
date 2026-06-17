@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 27/05/2026 às 06:59
+-- Host: 127.0.0.1:3307
+-- Tempo de geração: 17/06/2026 às 09:08
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -90,7 +90,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `status`, `criado_em`) VALUES
-(1, 'Administrador', 'admin@atendelab.com', '$2y$10$J9P2kU2BAMZ3TZcuxTsW4e1D/lka8EocYHzvyoOZmCNcWDQz3RuVC', 'admin', 'ativo', '2026-05-27 04:24:27');
+(1, 'Administrador', 'admin@atendelab.com', '$2y$10$kTc7CeIhUkElU.flyM8KY.Ncpnpz/SEGuQwHEQ0pQDQqBDVb.nCFu', 'admin', 'ativo', '2026-05-27 04:24:27');
 
 --
 -- Índices para tabelas despejadas

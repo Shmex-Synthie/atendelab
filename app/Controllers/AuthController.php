@@ -38,13 +38,13 @@ class AuthController
 
     public function entrar(): void 
     {
-        if ($_SERVER['REQUEST_METHOD']  !== 'POST') {
-            header('Location: ?contorller=auth&action=login');
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: ?controller=auth&action=login');
             exit;
         }
 
-        $email = trim($_POST['email'] ??'');
-        $senha = $_POST['senha'] ??'';
+        $email = trim($_POST['email'] ?? '');
+        $senha = $_POST['senha'] ?? '';
 
 
         if ($email === '' || $senha === '') {
