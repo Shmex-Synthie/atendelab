@@ -1,0 +1,337 @@
+/* ============================================================
+   AtendeLab — Tema escuro (cinza grafite + roxo, detalhes brancos)
+   Sobrescreve o Bootstrap mantendo a marcação existente.
+   ============================================================ */
+
+:root {
+    --al-bg: #17171d;
+    --al-bg-soft: #1d1d25;
+    --al-surface: #24242e;
+    --al-surface-2: #2c2c38;
+    --al-surface-3: #34343f;
+    --al-border: rgba(255, 255, 255, .09);
+    --al-border-strong: rgba(255, 255, 255, .16);
+
+    --al-purple: #8b5cf6;
+    --al-purple-600: #7c3aed;
+    --al-purple-700: #6d28d9;
+    --al-purple-soft: rgba(139, 92, 246, .18);
+
+    --al-text: #f3f3f8;
+    --al-text-muted: #a6a6b7;
+    --al-white: #ffffff;
+
+    /* Mapeia variáveis do Bootstrap para a paleta */
+    --bs-body-bg: var(--al-bg);
+    --bs-body-color: var(--al-text);
+    --bs-border-color: var(--al-border);
+    --bs-emphasis-color: var(--al-white);
+    --bs-link-color: var(--al-purple);
+    --bs-link-hover-color: #a987ff;
+}
+
+/* ----------------------------- Base ----------------------------- */
+body,
+body.bg-light {
+    min-height: 100vh;
+    background: radial-gradient(1200px 600px at 100% -10%, #20202b 0%, var(--al-bg) 55%) fixed;
+    color: var(--al-text);
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--al-text); }
+
+.text-secondary,
+.text-muted { color: var(--al-text-muted) !important; }
+
+a { color: var(--al-purple); }
+a:hover { color: #a987ff; }
+
+::selection { background: var(--al-purple-soft); }
+
+/* ----------------------------- Navbar ----------------------------- */
+.navbar.bg-success {
+    background: linear-gradient(90deg, #1c1430 0%, #2a1b4d 45%, #1b1530 100%) !important;
+    border-bottom: 1px solid var(--al-border-strong);
+}
+
+.navbar .navbar-brand {
+    color: var(--al-white);
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, .72);
+    position: relative;
+    transition: color .2s ease;
+}
+
+.navbar .nav-link::after {
+    content: "";
+    position: absolute;
+    left: .5rem;
+    right: .5rem;
+    bottom: .15rem;
+    height: 2px;
+    background: var(--al-purple);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
+    border-radius: 2px;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus { color: var(--al-white); }
+
+.navbar .nav-link:hover::after { transform: scaleX(1); }
+
+.navbar-toggler { border-color: var(--al-border-strong); }
+
+/* ----------------------------- Cards ----------------------------- */
+.card {
+    border-radius: 14px;
+    background-color: var(--al-surface);
+    border: 1px solid var(--al-border);
+    color: var(--al-text);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.card.shadow-sm { box-shadow: 0 6px 22px rgba(0, 0, 0, .35) !important; }
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: var(--al-border-strong);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .45) !important;
+}
+
+/* Cards de indicador (display-6) ganham um leve brilho roxo */
+.display-6 { color: var(--al-white); }
+
+/* ----------------------------- Tabelas ----------------------------- */
+.table {
+    --bs-table-bg: transparent;
+    --bs-table-color: var(--al-text);
+    --bs-table-hover-bg: var(--al-surface-2);
+    --bs-table-hover-color: var(--al-white);
+    color: var(--al-text);
+}
+
+.table > :not(caption) > * > * {
+    border-bottom-color: var(--al-border);
+    background-color: transparent;
+}
+
+.table thead.table-light th,
+.table .table-light th,
+.table .table-light {
+    background-color: var(--al-surface-2);
+    color: var(--al-text-muted);
+    border-bottom-color: var(--al-border-strong);
+    text-transform: uppercase;
+    font-size: .76rem;
+    letter-spacing: .04em;
+}
+
+.table th { white-space: nowrap; }
+
+.table-hover > tbody > tr { transition: background-color .15s ease; }
+
+/* ----------------------------- Formulários ----------------------------- */
+.form-control,
+.form-select {
+    background-color: var(--al-surface-2);
+    border: 1px solid var(--al-border);
+    color: var(--al-text);
+    transition: border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+
+.form-control::placeholder { color: #7c7c8c; }
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--al-surface-2);
+    color: var(--al-text);
+    border-color: var(--al-purple);
+    box-shadow: 0 0 0 .2rem var(--al-purple-soft);
+}
+
+.form-control:disabled,
+.form-select:disabled { background-color: var(--al-surface); }
+
+/* Seta do select e ícones de date/time em tema escuro */
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23a6a6b7' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1) brightness(1.6);
+    cursor: pointer;
+}
+
+textarea { resize: vertical; }
+
+/* ----------------------------- Botões ----------------------------- */
+.btn {
+    transition: transform .15s ease, box-shadow .15s ease,
+                background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.btn:active { transform: translateY(1px); }
+
+/* "success" no markup vira o roxo da marca */
+.btn-success {
+    --bs-btn-bg: var(--al-purple);
+    --bs-btn-border-color: var(--al-purple);
+    --bs-btn-hover-bg: var(--al-purple-700);
+    --bs-btn-hover-border-color: var(--al-purple-700);
+    --bs-btn-active-bg: var(--al-purple-700);
+    --bs-btn-active-border-color: var(--al-purple-700);
+    --bs-btn-disabled-bg: var(--al-purple);
+    --bs-btn-disabled-border-color: var(--al-purple);
+    color: #fff;
+}
+
+.btn-success:hover { box-shadow: 0 8px 20px rgba(124, 58, 237, .35); }
+
+.btn-outline-success {
+    --bs-btn-color: #b89dff;
+    --bs-btn-border-color: var(--al-purple-600);
+    --bs-btn-hover-bg: var(--al-purple);
+    --bs-btn-hover-border-color: var(--al-purple);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-bg: var(--al-purple-700);
+    --bs-btn-active-border-color: var(--al-purple-700);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--al-purple-600);
+    --bs-btn-border-color: var(--al-purple-600);
+    --bs-btn-hover-bg: var(--al-purple-700);
+    --bs-btn-hover-border-color: var(--al-purple-700);
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #b89dff;
+    --bs-btn-border-color: var(--al-purple-600);
+    --bs-btn-hover-bg: var(--al-purple-600);
+    --bs-btn-hover-border-color: var(--al-purple-600);
+    --bs-btn-hover-color: #fff;
+}
+
+.btn-outline-secondary {
+    --bs-btn-color: var(--al-text-muted);
+    --bs-btn-border-color: var(--al-border-strong);
+    --bs-btn-hover-bg: var(--al-surface-3);
+    --bs-btn-hover-border-color: var(--al-border-strong);
+    --bs-btn-hover-color: var(--al-white);
+}
+
+.btn-outline-danger {
+    --bs-btn-color: #ff7b89;
+    --bs-btn-border-color: #b3344a;
+    --bs-btn-hover-bg: #c0394f;
+    --bs-btn-hover-border-color: #c0394f;
+    --bs-btn-hover-color: #fff;
+}
+
+.btn-outline-light:hover { transform: translateY(-1px); }
+
+/* ----------------------------- Badges ----------------------------- */
+.badge { font-weight: 600; letter-spacing: .02em; }
+
+.text-bg-success { background-color: #2fae7a !important; color: #06140d !important; }
+.text-bg-warning { background-color: #e9a23b !important; color: #1c1304 !important; }
+.text-bg-primary { background-color: var(--al-purple) !important; color: #fff !important; }
+.text-bg-secondary { background-color: #4a4a57 !important; color: #e7e7ef !important; }
+.text-bg-danger   { background-color: #d3526a !important; color: #fff !important; }
+
+/* ----------------------------- Alerts ----------------------------- */
+.alert { border: 1px solid var(--al-border-strong); }
+
+.alert-success {
+    background-color: rgba(47, 174, 122, .14);
+    border-color: rgba(47, 174, 122, .45);
+    color: #8fe3bf;
+}
+
+.alert-danger {
+    background-color: rgba(211, 82, 106, .14);
+    border-color: rgba(211, 82, 106, .45);
+    color: #ff9aa8;
+}
+
+/* ----------------------------- Modais ----------------------------- */
+.modal-content {
+    background-color: var(--al-surface);
+    color: var(--al-text);
+    border: 1px solid var(--al-border-strong);
+    border-radius: 14px;
+}
+
+.modal-header,
+.modal-footer { border-color: var(--al-border); }
+
+.btn-close { filter: invert(1) grayscale(1) brightness(1.6); }
+
+/* ----------------------------- Marca / Login ----------------------------- */
+.login-card { width: min(100%, 430px); }
+
+.brand-mark {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--al-purple) 0%, var(--al-purple-700) 100%);
+    color: white;
+    font-weight: 700;
+    letter-spacing: .04em;
+    box-shadow: 0 10px 24px rgba(124, 58, 237, .45);
+}
+
+/* ----------------------------- Scrollbar ----------------------------- */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--al-surface-3) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+    background: var(--al-surface-3);
+    border-radius: 8px;
+    border: 2px solid var(--al-bg);
+}
+*::-webkit-scrollbar-thumb:hover { background: #45454f; }
+
+/* ----------------------------- Animações ----------------------------- */
+@keyframes alFadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes alFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Conteúdo principal "desliza" a cada navegação entre abas/páginas.
+   IMPORTANTE: a animação é aplicada aos blocos FILHOS do <main>, e não ao
+   próprio <main>. Animar o <main> faria dele um contexto de empilhamento,
+   prendendo os modais do Bootstrap atrás do backdrop (tela travada). Os
+   modais são excluídos para abrirem por cima normalmente. */
+main.container > :not(.modal) { animation: alFadeInUp .45s ease both; }
+
+/* Linhas da tabela entram suavemente */
+tbody tr { animation: alFadeIn .35s ease both; }
+
+/* Modais com leve subida ao abrir */
+.modal.fade .modal-dialog { transition: transform .3s ease, opacity .3s ease; }
+
+/* Respeita preferências de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+    main.container > *,
+    tbody tr { animation: none; }
+    .card,
+    .btn,
+    .navbar .nav-link::after { transition: none; }
+}

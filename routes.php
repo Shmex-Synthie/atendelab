@@ -1,146 +1,86 @@
 <?php
 
-
 require_once __DIR__ . '/app/Controllers/AuthController.php';
 require_once __DIR__ . '/app/Controllers/UsuariosController.php';
 require_once __DIR__ . '/app/Controllers/PessoasController.php';
 require_once __DIR__ . '/app/Controllers/TiposAtendimentosController.php';
 require_once __DIR__ . '/app/Controllers/AtendimentosController.php';
+require_once __DIR__ . '/app/Controllers/DashboardController.php';
+require_once __DIR__ . '/app/Controllers/FrontendController.php';
+require_once __DIR__ . '/app/Controllers/RelatoriosController.php';
 require_once __DIR__ . '/app/Middleware/auth.php';
 
 $controller = $_GET['controller'] ?? 'auth';
 $action = $_GET['action'] ?? 'login';
 
+/*
+ * Bloco de autenticacao.
+ * As actions de login/entrar sao publicas; dashboard exige sessao.
+ */
+if ($controller === 'auth') {
+
+    $authController = new AuthController();
+
+    switch ($action) {
+        case 'login':
+            $authController->exibirLogin();
+            break;
+        case 'entrar':
+            $authController->entrar();
+            break;
+        case 'dashboard':
+            exigirAutenticacao();
+            $authController->dashboard();
+            break;
+        case 'logout':
+            $authController->logout();
+            break;
+
+        default:
+            http_response_code(404);
+            echo 'Ação de autenticação não encontrada';
+    }
+    exit;
+}
+
+/*
+ * A partir daqui todas as rotas exigem usuario autenticado.
+ *
+ * Paginas visuais  -> controller=frontend
+ * Operacoes de dados -> controller=pessoas | tipos | atendimentos | dashboard
+ */
+exigirAutenticacao();
+
 switch ($controller) {
-    case 'auth':
-        $authController = new AuthController();
-
-        switch ($action) {
-            case 'login':
-                $authController->exibirLogin();
-                break;
-            case 'entrar':
-                $authController->entrar();
-                break;
-            case 'dashboard':
-                $authController->dashboard();
-                break;
-            case 'logout':
-                $authController->logout();
-                break;
-
-            default:
-                http_response_code(404);
-                echo 'acao de autenicacao nao encontrada';
-        }
+    case 'frontend':
+        $obj = new FrontendController();
         break;
-
+    case 'dashboard':
+        $obj = new DashboardController();
+        break;
     case 'usuarios':
-        exigirAutenticacao();
-        $usuariosController = new UsuariosController();
-
-        switch ($action) {
-            case 'listar':
-                $usuariosController->listar();
-                break;
-            case 'buscarPorId':
-                $usuariosController->buscarPorId();
-                break;
-            case 'criar':
-                $usuariosController->criar();
-                break;
-            case 'atualizar':
-                $usuariosController->atualizar();
-                break;
-            case 'excluir':
-                $usuariosController->excluir();
-                break;
-            default:
-                http_response_code(404);
-                echo 'acao de usuarios nao encontrada';
-        }
+        $obj = new UsuariosController();
         break;
-
     case 'pessoas':
-        exigirAutenticacao();
-        $pessoasController = new PessoasController();
-
-        switch ($action) {
-            case 'listar':
-                $pessoasController->listar();
-                break;
-            case 'buscarPorId':
-                $pessoasController->buscarPorId();
-                break;
-            case 'criar':
-                $pessoasController->criar();
-                break;
-            case 'atualizar':
-                $pessoasController->atualizar();
-                break;
-            case 'excluir':
-                $pessoasController->excluir();
-                break;
-            default:
-                http_response_code(404);
-                echo 'acao de pessoas nao encontrada';
-        }
+        $obj = new PessoasController();
         break;
-
-    case 'tipos-atendimentos':
-        exigirAutenticacao();
-        $tiposAtendimentosController = new TiposAtendimentosController();
-
-        switch ($action) {
-            case 'listar':
-                $tiposAtendimentosController->listar();
-                break;
-            case 'buscarPorId':
-                $tiposAtendimentosController->buscarPorId();
-                break;
-            case 'criar':
-                $tiposAtendimentosController->criar();
-                break;
-            case 'atualizar':
-                $tiposAtendimentosController->atualizar();
-                break;
-            case 'excluir':
-                $tiposAtendimentosController->excluir();
-                break;
-            default:
-                http_response_code(404);
-                echo 'acao de tipos de atendimentos nao encontrada';
-        }
+    case 'tipos':
+        $obj = new TiposAtendimentosController();
         break;
-
     case 'atendimentos':
-        exigirAutenticacao();
-        $atendimentosController = new AtendimentosController();
-
-        switch ($action) {
-            case 'listar':
-                $atendimentosController->listar();
-                break;
-            case 'buscarPorId':
-                $atendimentosController->buscarPorId();
-                break;
-            case 'criar':
-                $atendimentosController->criar();
-                break;
-            case 'atualizar':
-                $atendimentosController->atualizar();
-                break;
-            case 'excluir':
-                $atendimentosController->excluir();
-                break;
-            default:
-                http_response_code(404);
-                echo 'acao de atendimentos nao encontrada';
-        }
+        $obj = new AtendimentosController();
         break;
-
+    case 'relatorios':
+        $obj = new RelatoriosController();
+        break;
     default:
         http_response_code(404);
-        echo 'controlador nao encontrado';
+        exit('Controller não encontrado');
 }
-  
+
+if (!method_exists($obj, $action)) {
+    http_response_code(404);
+    exit('Ação não encontrada');
+}
+
+$obj->$action();

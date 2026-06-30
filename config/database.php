@@ -1,7 +1,6 @@
 <?php
 
 $host = '127.0.0.1';
-$porta = '3307'; // use 3307 quando necessario
 $banco = 'atendelab';
 $usuario = 'root';
 $senha = '';
@@ -9,7 +8,7 @@ $senha = '';
 try {
 
     $pdo = new PDO(
-        "mysql:host={$host};port={$porta};dbname={$banco};charset=utf8mb4",
+        "mysql:host={$host};dbname={$banco};charset=utf8mb4",
         $usuario,
         $senha
     );

@@ -19,14 +19,24 @@ class PessoasController
 
     public function listar(): void
     {
-        $sql = 'SELECT id, nome, documento, telefone, email, curso, periodo, status, observacoes
-                FROM pessoas
-                ORDER BY nome';
+        // atendimentos_abertos = atendimentos ainda nao resolvidos (aberto + em_andamento)
+        $sql = "SELECT p.id, p.nome, p.documento, p.telefone, p.email, p.curso, p.periodo, p.status, p.observacoes,
+                       (SELECT COUNT(*) FROM atendimentos a
+                        WHERE a.pessoa_id = p.id
+                          AND a.status IN ('aberto', 'em_andamento')) AS atendimentos_abertos
+                FROM pessoas p
+                ORDER BY p.nome";
 
         $stmt = $this->pdo->query($sql);
         $pessoas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $this->json($pessoas);
+    }
+
+    // Alias para a action "buscar" usada pela tela de pessoas.
+    public function buscar(): void
+    {
+        $this->buscarPorId();
     }
 
     public function buscarPorId(): void
