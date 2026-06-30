@@ -1,8 +1,3 @@
-/* ============================================================
-   AtendeLab — Tema escuro (cinza grafite + roxo, detalhes brancos)
-   Sobrescreve o Bootstrap mantendo a marcação existente.
-   ============================================================ */
-
 :root {
     --al-bg: #17171d;
     --al-bg-soft: #1d1d25;
@@ -21,7 +16,6 @@
     --al-text-muted: #a6a6b7;
     --al-white: #ffffff;
 
-    /* Mapeia variáveis do Bootstrap para a paleta */
     --bs-body-bg: var(--al-bg);
     --bs-body-color: var(--al-text);
     --bs-border-color: var(--al-border);
@@ -30,7 +24,6 @@
     --bs-link-hover-color: #a987ff;
 }
 
-/* ----------------------------- Base ----------------------------- */
 body,
 body.bg-light {
     min-height: 100vh;
@@ -48,7 +41,6 @@ a:hover { color: #a987ff; }
 
 ::selection { background: var(--al-purple-soft); }
 
-/* ----------------------------- Navbar ----------------------------- */
 .navbar.bg-success {
     background: linear-gradient(90deg, #1c1430 0%, #2a1b4d 45%, #1b1530 100%) !important;
     border-bottom: 1px solid var(--al-border-strong);
@@ -87,7 +79,7 @@ a:hover { color: #a987ff; }
 
 .navbar-toggler { border-color: var(--al-border-strong); }
 
-/* ----------------------------- Cards ----------------------------- */
+
 .card {
     border-radius: 14px;
     background-color: var(--al-surface);
@@ -104,10 +96,8 @@ a:hover { color: #a987ff; }
     box-shadow: 0 12px 30px rgba(0, 0, 0, .45) !important;
 }
 
-/* Cards de indicador (display-6) ganham um leve brilho roxo */
 .display-6 { color: var(--al-white); }
 
-/* ----------------------------- Tabelas ----------------------------- */
 .table {
     --bs-table-bg: transparent;
     --bs-table-color: var(--al-text);
@@ -136,7 +126,6 @@ a:hover { color: #a987ff; }
 
 .table-hover > tbody > tr { transition: background-color .15s ease; }
 
-/* ----------------------------- Formulários ----------------------------- */
 .form-control,
 .form-select {
     background-color: var(--al-surface-2);
@@ -158,7 +147,6 @@ a:hover { color: #a987ff; }
 .form-control:disabled,
 .form-select:disabled { background-color: var(--al-surface); }
 
-/* Seta do select e ícones de date/time em tema escuro */
 .form-select {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23a6a6b7' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
 }
@@ -171,7 +159,6 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 textarea { resize: vertical; }
 
-/* ----------------------------- Botões ----------------------------- */
 .btn {
     transition: transform .15s ease, box-shadow .15s ease,
                 background-color .2s ease, border-color .2s ease, color .2s ease;
@@ -179,7 +166,6 @@ textarea { resize: vertical; }
 
 .btn:active { transform: translateY(1px); }
 
-/* "success" no markup vira o roxo da marca */
 .btn-success {
     --bs-btn-bg: var(--al-purple);
     --bs-btn-border-color: var(--al-purple);
@@ -237,7 +223,6 @@ textarea { resize: vertical; }
 
 .btn-outline-light:hover { transform: translateY(-1px); }
 
-/* ----------------------------- Badges ----------------------------- */
 .badge { font-weight: 600; letter-spacing: .02em; }
 
 .text-bg-success { background-color: #2fae7a !important; color: #06140d !important; }
@@ -246,7 +231,6 @@ textarea { resize: vertical; }
 .text-bg-secondary { background-color: #4a4a57 !important; color: #e7e7ef !important; }
 .text-bg-danger   { background-color: #d3526a !important; color: #fff !important; }
 
-/* ----------------------------- Alerts ----------------------------- */
 .alert { border: 1px solid var(--al-border-strong); }
 
 .alert-success {
@@ -261,7 +245,6 @@ textarea { resize: vertical; }
     color: #ff9aa8;
 }
 
-/* ----------------------------- Modais ----------------------------- */
 .modal-content {
     background-color: var(--al-surface);
     color: var(--al-text);
@@ -274,7 +257,6 @@ textarea { resize: vertical; }
 
 .btn-close { filter: invert(1) grayscale(1) brightness(1.6); }
 
-/* ----------------------------- Marca / Login ----------------------------- */
 .login-card { width: min(100%, 430px); }
 
 .brand-mark {
@@ -290,7 +272,6 @@ textarea { resize: vertical; }
     box-shadow: 0 10px 24px rgba(124, 58, 237, .45);
 }
 
-/* ----------------------------- Scrollbar ----------------------------- */
 * {
     scrollbar-width: thin;
     scrollbar-color: var(--al-surface-3) transparent;
@@ -303,7 +284,6 @@ textarea { resize: vertical; }
 }
 *::-webkit-scrollbar-thumb:hover { background: #45454f; }
 
-/* ----------------------------- Animações ----------------------------- */
 @keyframes alFadeInUp {
     from { opacity: 0; transform: translateY(14px); }
     to   { opacity: 1; transform: none; }
@@ -314,20 +294,12 @@ textarea { resize: vertical; }
     to   { opacity: 1; }
 }
 
-/* Conteúdo principal "desliza" a cada navegação entre abas/páginas.
-   IMPORTANTE: a animação é aplicada aos blocos FILHOS do <main>, e não ao
-   próprio <main>. Animar o <main> faria dele um contexto de empilhamento,
-   prendendo os modais do Bootstrap atrás do backdrop (tela travada). Os
-   modais são excluídos para abrirem por cima normalmente. */
 main.container > :not(.modal) { animation: alFadeInUp .45s ease both; }
 
-/* Linhas da tabela entram suavemente */
 tbody tr { animation: alFadeIn .35s ease both; }
 
-/* Modais com leve subida ao abrir */
 .modal.fade .modal-dialog { transition: transform .3s ease, opacity .3s ease; }
 
-/* Respeita preferências de redução de movimento */
 @media (prefers-reduced-motion: reduce) {
     main.container > *,
     tbody tr { animation: none; }

@@ -26,13 +26,8 @@ class TiposAtendimentosController
         $this->json($this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC));
     }
 
-    // Alias para compatibilidade com a action "buscarPorId".
-    public function buscarPorId(): void
-    {
-        $this->buscar();
-    }
 
-    public function buscar(): void
+    public function buscarPorId(): void
     {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 

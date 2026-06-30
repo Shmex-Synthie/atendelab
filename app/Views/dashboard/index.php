@@ -11,7 +11,6 @@ require __DIR__ . '/../layouts/header.php';
 
 <div id="alerta"></div>
 
-<!-- Totais gerais -->
 <div class="row g-3 mb-3">
     <div class="col-md-4">
         <div class="card border-0 shadow-sm h-100">
@@ -40,7 +39,6 @@ require __DIR__ . '/../layouts/header.php';
     </div>
 </div>
 
-<!-- Atendimentos por status -->
 <div class="row g-3 mb-4">
     <div class="col-6 col-lg-3">
         <div class="card border-0 shadow-sm h-100">
@@ -100,7 +98,6 @@ require __DIR__ . '/../layouts/header.php';
         </div>
     </div>
 
-    <!-- Atendimentos recentes -->
     <div class="col-lg-6">
         <div class="card border-0 shadow-sm h-100">
             <div class="card-body">
@@ -149,7 +146,6 @@ function badgeStatus(status) {
     return `<span class="badge ${info.classe}">${AtendeLabApi.escape(info.label)}</span>`;
 }
 
-// Converte 'YYYY-MM-DD' (ou com horário) para 'DD/MM/YYYY'.
 function formatarData(valor) {
     if (!valor) return '';
     const m = String(valor).match(/^(\d{4})-(\d{2})-(\d{2})/);
@@ -175,7 +171,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         setText('statConcluidos', ind.concluidos ?? 0);
         setText('statCancelados', ind.cancelados ?? 0);
 
-        // Top pessoas
         const top = Array.isArray(dados.top_pessoas) ? dados.top_pessoas : [];
         const tbodyTop = document.getElementById('tabelaTopPessoas');
         tbodyTop.innerHTML = top.length
@@ -189,7 +184,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </tr>`).join('')
             : '<tr><td colspan="3" class="text-center py-4">Nenhum atendimento ainda.</td></tr>';
 
-        // Recentes
         const recentes = Array.isArray(dados.atendimentos_recentes) ? dados.atendimentos_recentes : [];
         const tbodyRec = document.getElementById('tabelaRecentes');
         tbodyRec.innerHTML = recentes.length

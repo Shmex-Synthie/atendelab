@@ -24,7 +24,6 @@ class UsuariosController
         echo json_encode($usuarios, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
-    // 2. BUSCAR USUÁRIO POR ID
     public function buscarPorId(): void
     {
         header('Content-Type: application/json; charset=utf-8');
@@ -56,7 +55,6 @@ class UsuariosController
         echo json_encode($usuario, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
     }
 
-    // 3. CADASTRAR USUÁRIO (Criar)
     public function criar(): void
     {
         header('Content-Type: application/json; charset=utf-8');
@@ -113,7 +111,6 @@ class UsuariosController
         }
     }
 
-    // 4. ATUALIZAR USUÁRIO (O método que estava faltando!)
     public function atualizar(): void
     {
         header('Content-Type: application/json; charset=utf-8');
@@ -177,7 +174,6 @@ class UsuariosController
         }
     }
 
-    // 5. EXCLUIR USUÁRIO
     public function excluir(): void
     {
         header('Content-Type: application/json; charset=utf-8');

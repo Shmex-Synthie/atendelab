@@ -1,9 +1,4 @@
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-SET NAMES utf8mb4;
-
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -14,7 +9,7 @@ CREATE TABLE `usuarios` (
   `criado_em` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+)
 
 CREATE TABLE `pessoas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,7 +23,7 @@ CREATE TABLE `pessoas` (
   `status` enum('ativo','inativo') NOT NULL DEFAULT 'ativo',
   PRIMARY KEY (`id`),
   UNIQUE KEY `documento` (`documento`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) 
 
 
 CREATE TABLE `tipos_atendimentos` (
@@ -60,24 +55,12 @@ CREATE TABLE `atendimentos` (
   CONSTRAINT `atendimentos_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
 
---
--- Usuario administrador padrao
--- E-mail: admin@atendelab.com  |  Senha: 123456
---
-
---
--- Usuarios (senha de todos: 123456)
---
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `perfil`, `status`) VALUES
 (1, 'Administrador', 'admin@atendelab.com', '$2y$10$3IZHNdb/O7p0ce6HDg6QmeF5HFpRZKDaP7ALUhbtT8FNJKrteDRmi', 'admin', 'ativo'),
 (2, 'Carla Mendes', 'carla@atendelab.com', '$2y$10$3IZHNdb/O7p0ce6HDg6QmeF5HFpRZKDaP7ALUhbtT8FNJKrteDRmi', 'atendente', 'ativo'),
 (3, 'Bruno Souza', 'bruno@atendelab.com', '$2y$10$3IZHNdb/O7p0ce6HDg6QmeF5HFpRZKDaP7ALUhbtT8FNJKrteDRmi', 'atendente', 'ativo');
 
---
--- Tipos de atendimento
---
 INSERT INTO `tipos_atendimentos` (`id`, `nome`, `descricao`, `status`) VALUES
 (1, 'Atendimento acadêmico', 'Orientações gerais sobre a vida acadêmica.', 'ativo'),
 (2, 'Suporte técnico', 'Apoio com sistemas, portal do aluno e laboratórios.', 'ativo'),
@@ -86,9 +69,7 @@ INSERT INTO `tipos_atendimentos` (`id`, `nome`, `descricao`, `status`) VALUES
 (5, 'Estágio e carreira', 'Encaminhamento para vagas de estágio e orientação profissional.', 'ativo'),
 (6, 'Apoio psicopedagógico', 'Suporte emocional e pedagógico ao estudante.', 'inativo');
 
---
--- Pessoas atendidas
---
+
 INSERT INTO `pessoas` (`id`, `nome`, `documento`, `telefone`, `email`, `curso`, `periodo`, `observacoes`, `status`) VALUES
 (1, 'Ana Beatriz Lima', '101.202.303-01', '(47) 99876-1010', 'ana.lima@univille.br', 'Engenharia de Software', '5', 'Aluna veterana, participa do PET.', 'ativo'),
 (2, 'Carlos Eduardo Rocha', '102.203.304-02', '(47) 99876-2020', 'carlos.rocha@univille.br', 'Engenharia de Software', '5', NULL, 'ativo'),
@@ -103,9 +84,7 @@ INSERT INTO `pessoas` (`id`, `nome`, `documento`, `telefone`, `email`, `curso`, 
 (11, 'Larissa Fernandes', '111.212.313-11', '(47) 99877-2223', 'larissa.fernandes@univille.br', 'Enfermagem', '1', 'Transferida de outra instituição.', 'inativo'),
 (12, 'Diego Ramos', '112.213.314-12', '(47) 99877-3334', 'diego.ramos@univille.br', 'Educação Física', '9', 'Concluindo o curso.', 'inativo');
 
---
--- Atendimentos
---
+
 INSERT INTO `atendimentos` (`id`, `pessoa_id`, `tipo_atendimento_id`, `usuario_id`, `descricao`, `status`, `data_atendimento`, `horario_atendimento`, `observacao_final`) VALUES
 (1, 1, 1, 1, 'Dúvidas sobre a grade curricular do 5º período.', 'concluido', '2026-06-01', '09:00:00', 'Aluna orientada sobre pré-requisitos.'),
 (2, 2, 2, 2, 'Sem acesso ao portal do aluno.', 'concluido', '2026-06-02', '10:30:00', 'Senha redefinida e acesso liberado.'),
@@ -123,5 +102,3 @@ INSERT INTO `atendimentos` (`id`, `pessoa_id`, `tipo_atendimento_id`, `usuario_i
 (14, 6, 2, 1, 'Configuração de software do laboratório.', 'concluido', '2026-06-20', '09:15:00', 'Software instalado e testado.'),
 (15, 8, 4, 3, 'Renovação de financiamento estudantil.', 'em_andamento', '2026-06-22', '13:00:00', NULL),
 (16, 10, 5, 2, 'Revisão de currículo para vaga de estágio.', 'aberto', '2026-06-25', '17:00:00', NULL);
-
-COMMIT;
